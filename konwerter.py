@@ -8,19 +8,19 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QLa
 class DataConverter(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Data Converter")
+        self.setWindowTitle("Konwerter Plikow")
         self.setGeometry(100, 100, 400, 200)
         self.layout = QVBoxLayout()
         self.central_widget = QWidget()
         self.central_widget.setLayout(self.layout)
         self.setCentralWidget(self.central_widget)
-        self.input_file_label = QLabel("Input File:")
+        self.input_file_label = QLabel("Plik wejsciowy:")
         self.input_file_edit = QLineEdit()
-        self.browse_input_button = QPushButton("Browse")
-        self.output_file_label = QLabel("Output File:")
+        self.browse_input_button = QPushButton("Szukaj")
+        self.output_file_label = QLabel("Plik wyjsciowy:")
         self.output_file_edit = QLineEdit()
-        self.browse_output_button = QPushButton("Browse")
-        self.convert_button = QPushButton("Convert")
+        self.browse_output_button = QPushButton("Szukaj")
+        self.convert_button = QPushButton("Konwertuj")
         self.layout.addWidget(self.input_file_label)
         self.layout.addWidget(self.input_file_edit)
         self.layout.addWidget(self.browse_input_button)
@@ -33,11 +33,11 @@ class DataConverter(QMainWindow):
         self.convert_button.clicked.connect(self.convert_data)
 
     def browse_input_file(self):
-        file_path, _ = QFileDialog.getOpenFileName(self, "Select Input File")
+        file_path, _ = QFileDialog.getOpenFileName(self, "Wybierz plik wejsciowy")
         self.input_file_edit.setText(file_path)
 
     def browse_output_file(self):
-        file_path, _ = QFileDialog.getSaveFileName(self, "Select Output File")
+        file_path, _ = QFileDialog.getSaveFileName(self, "Wybierz plik wyjsciowy")
         self.output_file_edit.setText(file_path)
 
     def show_message(self, message):
@@ -60,7 +60,7 @@ class DataConverter(QMainWindow):
         output_file = self.output_file_edit.text()
 
         if not input_file or not output_file:
-            self.show_message("Please provide input and output file paths.")
+            self.show_message("Prosze podać sciezki plików wejsciowych i wyjsciowych")
             return
 
         with open(input_file, 'r') as file:
@@ -81,13 +81,13 @@ class DataConverter(QMainWindow):
         elif input_file.endswith('.yaml') and output_file.endswith('.json'):
             output_data = self.convert_yaml_to_json(input_data)
         else:
-            self.show_message("Unsupported file format.")
+            self.show_message("Ten format plikow nie jest obslugiwany")
             return
 
         with open(output_file, 'w') as file:
             file.write(output_data)
 
-        self.show_message("Conversion completed successfully.")
+        self.show_message("Konwersacja udana pomyslnie")
 
 
 if __name__ == '__main__':
