@@ -42,16 +42,16 @@ class DataConverter(QMainWindow):
 
     def show_message(self, message):
         QMessageBox.information(self, "Message", message)
-
+#konwertowanie xml na json
     def convert_xml_to_json(self, xml_data):
         return json.dumps(xmltodict.parse(xml_data), indent=4)
-
+#konwertowanie json na xml
     def convert_json_to_xml(self, json_data):
         return xmltodict.unparse(json.loads(json_data), pretty=True)
-
+#konwertowanie json na yamla
     def convert_json_to_yaml(self, json_data):
         return yaml.dump(json.loads(json_data), default_flow_style=False)
-
+#konwertowanie yaml'a na json
     def convert_yaml_to_json(self, yaml_data):
         return json.dumps(yaml.safe_load(yaml_data), indent=4)
 
